@@ -18,5 +18,9 @@ def debug():
         "environment": "dev"
     })
 
+@app.route("/error")
+def error():
+    raise Exception("Intentional test error for troubleshooting practice.")
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
