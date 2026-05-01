@@ -96,3 +96,14 @@ Both returned a successful health check response.
 
 ## What I Learned
 Application startup failures can be caused by missing packages inside the runtime environment. systemd status shows whether the service is running, but journalctl provides the error details needed to identify the cause.
+
+## Screenshots
+
+### Failure logs
+
+![Failure logs](../screenshots/scenario-03-missing-flask-logs.png)
+
+### Fixed service and health check
+
+![Fixed service 1](../screenshots/scenario-03-fixed-service-health-check-1.png)
+![Fixed service 2](../screenshots/scenario-03-fixed-service-health-check-2.png)
