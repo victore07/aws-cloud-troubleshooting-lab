@@ -26,8 +26,8 @@ Local machine -> EC2 public IPv4 -> Security Group TCP 5000 -> Flask app
 
 ## Troubleshooting Scenarios
 
-1. Website unreachable due to missing security group rule
-2. Flask service stopped or failed
-3. Application error visible in logs
-4. SSH access issue
-5. Port mismatch between app and security group
+| Incident                                          | Area       | Summary                                                                     |
+| ------------------------------------------------- | ---------- | --------------------------------------------------------------------------- |
+| [Incident 01](docs/incident-01-security-group.md) | Networking | App unreachable due to missing security group rule |
+| [Incident 02](docs/incident-02-service-stopped.md) | Service Management | App unreachable because the systemd service was stopped |
+| [Incident 03](docs/incident-03-missing-dependency.md) | Python Runtime | Flask service failed because a required Python package was missing |
