@@ -36,7 +36,7 @@ curl http://localhost:5000/health
 The external health check also failed:
 
 ```bash
-curl http://<EC2_PUBLIC_IPV4>:5000/health
+curl http://54.183.179.27:5000/health
 ```
 
 ## Diagnosis
@@ -89,7 +89,7 @@ curl http://localhost:5000/health
 I also tested the health endpoint externally from my local machine:
 
 ```bash
-curl http://<EC2_PUBLIC_IPV4>:5000/health
+curl http://54.183.179.27:5000/health
 ```
 
 Both returned a successful health check response.
