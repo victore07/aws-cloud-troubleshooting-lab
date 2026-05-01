@@ -56,3 +56,21 @@ The health endpoint responded successfully.
 
 ## What I Learned
 This was a good reminder to check both the app and the network path. The service can be running normally on the instance, but still be unreachable if the security group blocks the port.
+
+## Screenshots
+
+### External request timed out
+
+![External timeout](../screenshots/scenario-01-external-timeout.png)
+
+### App responded locally on EC2
+
+![Localhost success](../screenshots/scenario-01-localhost-success.png)
+
+### Security group rule restored
+
+![Security group restored](../screenshots/scenario-01-security-group-restored.png)
+
+### External request succeeded after fix
+
+![External success](../screenshots/scenario-01-external-success.png)
