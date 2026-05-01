@@ -88,3 +88,14 @@ Both requests returned a successful health check response.
 
 ## What I Learned
 A working EC2 instance does not guarantee that the application is running. When troubleshooting an outage, I should check both infrastructure reachability and overall health of service. systemd status and local curl tests help isolate whether the failure is caused by the application process or the EC2 instance.
+
+
+## Screenshots
+
+### Service stopped
+
+![Service stopped](../screenshots/scenario-02-service-stopped-status.png)
+
+### Service restored and endpoint working
+
+![Service restored](../screenshots/scenario-02-service-restored-health-check.png)
