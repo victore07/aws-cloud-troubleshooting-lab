@@ -1,74 +1,58 @@
-# Incident 01: Website Unreachable Due to Security Group
+# Troubleshooting Scenario 01: App Unreachable Due to Blocked Port
 
-## Summary
+## Scenario Type
+Simulated lab scenario
 
-The Flask application was running successfully on an EC2 instance, but the service was unreachable from my local machine.
+## Goal
+Practice troubleshooting a common EC2 issue: the app is running on the instance, but it cannot be reached from my local machine.
 
-## Environment
+## Failure Introduced
+I temporarily removed the inbound security group rule for TCP port 5000.
 
-- AWS EC2
-- Amazon Linux 2023
-- Python Flask
-- systemd
-- Security Group inbound rules
-- Port: 5000
-
-## Symptoms
-
-From my local machine, the health endpoint failed:
+## Expected Behavior
+The Flask app should respond from my local machine:
 
 ```bash
 curl http://54.183.179.27:5000/health
 ```
 
-The request timed out.
+## Observed Behavior
+After I removed the inbound rule, requests from my local machine timed out.
 
-## Initial Checks
-
-I SSHed into the EC2 instance and checked whether the application was running:
+## Diagnosis
+First, I checked whether the service was still running on the EC2 instance:
 
 ```bash
 sudo systemctl status aws-troubleshooting-lab
 ```
 
-I also tested the app locally from inside the EC2 instance:
+Then I tested the app from inside the instance:
 
 ```bash
 curl http://localhost:5000/health
 ```
 
-The local request succeeded, which showed that the Flask app itself was running.
+That request worked, so the Flask app itself was healthy. The issue had to be somewhere between my local machine and the EC2 instance.
 
 ## Root Cause
-
-The EC2 security group did not allow inbound TCP traffic on port 5000 from my local IP address.
-
-The application was working, but traffic could not reach the instance from outside AWS.
+The security group was blocking inbound traffic on TCP port 5000.
 
 ## Fix
-
-I updated the EC2 security group inbound rules to allow traffic to the Flask app on port 5000.
+I added the inbound rule back to the EC2 security group:
 
 Custom TCP | TCP | 5000 | 0.0.0.0/0
 
 note: I used `0.0.0.0/0` because my IP changes when using a VPN. In a production environment, I would avoid opening this port publicly and would restrict access to known IP ranges.
 
-## Verification
 
-After updating the security group, I tested the endpoint again from my local machine:
+## Verification
+After restoring the rule, I tested the endpoint again from my local machine:
 
 ```bash
 curl http://54.183.179.27:5000/health
 ```
 
-The endpoint returned a successful JSON response:
-
-```json
-{
-  "status": "ok"
-}
-```
+The health endpoint responded successfully.
 
 ## What I Learned
-
-The app was running correctly on the instance, but external traffic could not reach it because the security group was blocking the port. This was a good reminder to check both the service itself and the AWS security groups when debugging connectivity issues.
+This was a good reminder to check both the app and the network path. The service can be running normally on the instance, but still be unreachable if the security group blocks the port.
