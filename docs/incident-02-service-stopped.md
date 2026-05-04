@@ -27,7 +27,7 @@ The EC2 instance was still reachable through SSH, but the application health end
 From my local machine:
 
 ```bash
-curl http://54.183.179.27:5000/health
+curl http://<API_BASE_URL>:5000/health
 ```
 
 The request failed because nothing was listening on the application port.
@@ -36,7 +36,7 @@ The request failed because nothing was listening on the application port.
 First, I confirmed that the EC2 instance itself was reachable by connecting over SSH:
 
 ```bash
-ssh -i <MY_KEY>.pem ec2-user@54.183.179.27
+ssh -i <MY_KEY>.pem ec2-user@<API_BASE_URL>
 ```
 
 Then I checked the application locally from inside the EC2 instance:
@@ -81,7 +81,7 @@ curl http://localhost:5000/health
 From my local machine:
 
 ```bash
-curl http://54.183.179.27:5000/health
+curl http://<API_BASE_URL>:5000/health
 ```
 
 Both requests returned a successful health check response.

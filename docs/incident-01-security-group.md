@@ -13,7 +13,7 @@ I temporarily removed the inbound security group rule for TCP port 5000.
 The Flask app should respond from my local machine:
 
 ```bash
-curl http://54.183.179.27:5000/health
+curl http://<API_BASE_URL>:5000/health
 ```
 
 ## Observed Behavior
@@ -49,7 +49,7 @@ note: I used `0.0.0.0/0` because my IP changes when using a VPN. In a production
 After restoring the rule, I tested the endpoint again from my local machine:
 
 ```bash
-curl http://54.183.179.27:5000/health
+curl http://<API_BASE_URL>:5000/health
 ```
 
 The health endpoint responded successfully.
